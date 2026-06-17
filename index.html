@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sleepinglight - Defense Industry CEO</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/funAddon.css">
+</head>
+<body>
+    <div class="hud-overlay"></div>
+    <div class="scan-lines"></div>
+
+    <header class="main-header">
+        <div class="logo">
+            <h1>DEFENSE INDUSTRY CEO</h1>
+            <div class="radar-sweep"></div>
+        </div>
+        <nav id="main-nav">
+            <button class="nav-button active" data-target="dashboard">DASHBOARD</button>
+            <button class="nav-button" data-target="supplier-market">SUPPLIER MARKET</button>
+            <button class="nav-button" data-target="warehouse">WAREHOUSE</button>
+            <button class="nav-button" data-target="assembly">ASSEMBLY</button>
+            <button class="nav-button" data-target="global-contracts">GLOBAL CONTRACTS</button>
+        </nav>
+    </header>
+
+    <div class="main-container">
+        <main class="main-content" style="height: 1000px; display: flex; flex-direction: column;">
+            <section id="dashboard" class="game-section active">
+                <div class="dashboard-grid">
+                    <div class="panel-card finances">
+                        <h3>FINANCES</h3>
+                        <div class="finance-value-large">$<span id="company-money">0</span></div>
+                        <div class="finance-meta">Current Day: <span id="current-day">1</span></div>
+                    </div>
+                    <div class="panel-card reputation">
+                        <h3>REPUTATION</h3>
+                        <div class="progress-bar-container">
+                            <div class="progress-bar" id="reputation-bar"></div>
+                            <span class="progress-label"><span id="company-reputation">0</span>/100</span>
+                        </div>
+                    </div>
+                    <div class="panel-card stats">
+                        <h3>COMPANY STATS</h3>
+                        <p>Tech Level: <span id="company-tech-level">1</span></p>
+                        <p>Storage Capacity: <span id="storage-capacity">0</span></p>
+                    </div>
+                    <div class="panel-card actions">
+                        <h3>ACTIONS</h3>
+                        <button id="next-day-button" class="btn">NEXT DAY</button>
+                        <button id="save-game-button" class="btn">SAVE GAME</button>
+                        <button id="load-game-button" class="btn">LOAD GAME</button>
+                    </div>
+                    <!-- NEW PANELS BELOW -->
+                    <div id="market-trend-panel"></div>
+                    <div id="active-contracts-panel"></div>
+                    <div id="production-queue-panel"></div>
+                    <div id="competitor-activity-panel"></div>
+                    <div id="political-risk-panel"></div>
+                    <div id="daily-expense-panel"></div>
+                </div>
+            </section>
+
+            <section id="supplier-market" class="game-section">
+                <h2>SUPPLIER MARKET</h2>
+                <div id="supplier-offers" class="card-container"></div>
+            </section>
+
+            <section id="warehouse" class="game-section">
+                <h2>WAREHOUSE</h2>
+                <div id="warehouse-info">
+                    <p>Current Inventory: <span id="inventory-count">0</span>/<span id="max-inventory">0</span></p>
+                </div>
+                <div id="warehouse-upgrade-ui" class="card-container"></div>
+                <div id="warehouse-inventory" class="card-container"></div>
+            </section>
+
+            <section id="assembly" class="game-section">
+                <h2>ASSEMBLY LINE</h2>
+                <div id="assembly-container">
+                    <div class="assembly-left">
+                        <h3>BLUEPRINTS</h3>
+                        <select id="product-blueprint-select"></select>
+                        <div id="selected-blueprint-details"></div>
+                        <div id="required-parts-list"></div>
+                        <div id="assembly-part-selection"></div>
+                        <button id="assemble-product-button" class="btn" disabled>ASSEMBLE PRODUCT</button>
+                    </div>
+                    <div class="assembly-right">
+                        <h3>ASSEMBLED PRODUCTS</h3>
+                        <div id="assembled-products-list"></div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="global-contracts" class="game-section">
+                <h2>GLOBAL CONTRACTS</h2>
+                <div id="country-contracts" class="card-container"></div>
+            </section>
+        </main>
+        
+        <aside class="sidebar-intel" id="intel-panel">
+            <div class="sidebar-content">
+                <h2>INTEL / DAILY REPORT</h2>
+                <div class="report-section">
+                    <h3>FINANCIAL SUMMARY</h3>
+                    <p>Revenue: <span class="text-success">$<span id="report-revenue">0</span></span></p>
+                    <p>Expenses: <span class="text-danger">$<span id="report-expenses">0</span></span></p>
+                    <p>Net Profit: <span id="report-net-profit">$0</span></p>
+                    <hr>
+                    <p>Company Capital: <strong>$<span id="report-company-capital">0</span></strong></p>
+                </div>
+                <div class="report-section">
+                    <h3>REPUTATION</h3>
+                    <p>Change: <span id="report-reputation-change">0</span></p>
+                    <p>Current: <span id="report-reputation-current">0</span></p>
+                </div>
+                <div class="report-section">
+                    <h3>MARKET MOVEMENT</h3>
+                    <p>Steel Index: <span id="report-steel-index">0</span></p>
+                    <p>Electronics Index: <span id="report-electronics-index">0</span></p>
+                    <p>Geopolitical Tension: <span id="report-geopolitical-tension">0</span></p>
+                </div>
+                <div class="report-section">
+                    <h3>COMPETITOR ACTIVITY</h3>
+                    <ul id="report-competitor-activity"><li>No activity detected.</li></ul>
+                </div>
+                <div class="report-section">
+                    <h3>EVENT LOG</h3>
+                    <ul id="event-log"></ul>
+                </div>
+            </div>
+        </aside>
+    </div>
+
+    <!-- Modals and Overlays -->
+    <div id="loading-overlay" class="loading-overlay">
+        <div class="spinner"></div>
+    </div>
+    
+    <div id="notification-container"></div>
+
+    <script type="module" src="js/main.js"></script>
+    <script type="module" src="js/winLoseSystem.js"></script>
+    <script src="js/funAddon.js"></script>
+</body>
+</html>
